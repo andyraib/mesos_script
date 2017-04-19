@@ -1,0 +1,21 @@
+{
+
+    "id": "examplelast",
+
+    "cmd":"time bash new.bash",
+
+    "cpus": 1.0,
+
+    "mem": 10.0,
+
+    "instances": 1,
+
+    "uris": [
+
+       "https://raw.githubusercontent.com/andyraib/mesos_script/master/new.bash"
+
+    ]
+
+}
+
+
