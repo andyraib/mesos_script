@@ -11,7 +11,7 @@ Installar zookeeper
 ``` sudo yum -y install mesosphere-zookeeper```
 
 
-## Configuración MASTER
+## Configuración MESOS- MASTER
 
 Para realizar la configuración del master fue necesario configurar en cada nodo (tanto master y slaves) la dirección IP en el archivo ZK de mesos , en este caso, con la dirección IP 10.110.70.45
 
@@ -45,15 +45,42 @@ Se necesita definir la lista de los master que usara el Marathon, se copiarán e
 Se necesita almacenar el estado de marathon en nuestro zookeeper, por lo que es necesario conectar nuestro zookeeper con marathon con el siguiente comando y modificando el `mesos` por `marathon`
 
 
-` sudo cp /etc/marathon/conf/master /etc/marathon/conf/zk `
+``` sudo cp /etc/marathon/conf/master /etc/marathon/conf/zk ```
+
 Antes 
 
-`zk://192.0.2.1:2181,192.0.2.2:2181,192.0.2.3:2181/mesos`
+```zk://192.0.2.1:2181,192.0.2.2:2181,192.0.2.3:2181/mesos```
 
 Después
-` zk://192.0.2.1:2181,192.0.2.2:2181,192.0.2.3:2181/marathon`
 
-`sudo cp /etc/marathon/conf/master /etc/marathon/conf/zk`
+``` zk://192.0.2.1:2181,192.0.2.2:2181,192.0.2.3:2181/marathon```
+
+Para verificar que el mesos ha sido configurado correctamente, es necesario levantar `zookeeper`, `mesos-master` y `marathon`
+
+```sudo systemctl start zookeeper ```
+```sudo systemctl start mesos-master``` 
+```dudo systemctl start marathon```
+
+En un navagador web verificar el mesos el puerto `5050` 
+
+```http://10.110.70.45:5050/ ```
+
+EN un navegador web verificar marathon en el puerto  `8080`
+
+```http://10.110.70.45:8080 ```
+
+
+## Configuración MESOS-SLAVE
+
+Se detendrá `zookeeper`
+
+``` sudo systemctl stop zookeeper```
+
+Se necesita el IP y el hostname de los nodos que se usarán como slaves.
+
+```echo 10.110.70.170 | sudo tee /etc/mesos-slave/ip``` 
+```sudo cp /etc/mesos-slave/ip /etc/mesos-slave/hostname``` 
+
 Limpiar los registros que se tenian del slave con el siguiente comando:
 
 ```sudo rm -f /var/lib/mesos/meta/slaves/latest```
@@ -62,7 +89,11 @@ Se necesito de estos comando para levantar el slave con el master.
 
 ```/usr/sbin/mesos-slave --master=zk://10.110.70.45:2181/mesos --log_dir=/var/log/mesos --hostname=10.110.70.170 --ip=10.110.70.170 --work_dir=/var/lib/mesos ```
 
-Se creo un archivo
+
+
+## Task Mesos
+
+
 
 Comando utilizado para levantar el job en mesos
 
