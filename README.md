@@ -109,5 +109,5 @@ Nombre_prueba      CPU     Mems     Instancia   Tiempo
 test1		   1       32          1         15 
 test2              1       16          2         21
 test3              4       16          1         15
-test_maquina_bash                                78                                       
+test_maquina_bash  -       -           -          78                                       
 
