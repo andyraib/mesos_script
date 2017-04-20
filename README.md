@@ -104,10 +104,11 @@ El archivo se encuentra en el repositorio con el nombre de `app.json` y el coman
 
 ## Resultados
 
+```
 Nombre_prueba      CPU     Mems     Instancia   Tiempo
 
 test1		   1       32          1         15 
 test2              1       16          2         21
 test3              4       16          1         15
 test_maquina_bash  -       -           -          78                                       
-
+```
