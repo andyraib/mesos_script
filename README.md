@@ -13,6 +13,12 @@ Installar zookeeper
 
 ## Configuración
 
+Para realizar la configuración del master fue necesario configurar en cada nodo (tanto master y slaves) la dirección IP en el archivo ZK de mesos , en este caso, con la dirección IP 10.110.70.45
+
+`sudo vim  /etc/mesos/zk`
+
+`zk://10.110.70.45:2181/mesos `
+
 
 Limpiar los registros que se tenian del slave con el siguiente comando:
 
